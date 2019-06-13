@@ -1,15 +1,17 @@
 package br.senac.sp.probabilidade.question;
 
 import br.senac.sp.probabilidade.model.Product;
+import br.senac.sp.probabilidade.model.Sales;
 
+import java.util.Collection;
 import java.util.Random;
 
 public interface Simulation {
 
-	Simulation runWith(Product... products);
+	Collection<Sales> computeSalesOf(Product... products);
 
 	static Integer rng(Integer maxLimit) {
-		return new Random().nextInt(maxLimit+1);
+		return new Random().nextInt(maxLimit + 1);
 	}
 
 }

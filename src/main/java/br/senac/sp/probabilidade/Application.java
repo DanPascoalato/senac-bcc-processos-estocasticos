@@ -2,8 +2,8 @@ package br.senac.sp.probabilidade;
 
 import br.senac.sp.probabilidade.model.*;
 import br.senac.sp.probabilidade.question.Q1Simulation;
-import br.senac.sp.probabilidade.question.Q2Simulation;
-import br.senac.sp.probabilidade.question.Simulation;
+
+import java.util.Collection;
 
 public class Application {
 
@@ -29,8 +29,8 @@ public class Application {
 			.payroll(buildPayroll())
 			.build();
 
-		Simulation simA = new Q1Simulation(company).runWith(p1, p2);
-		Simulation simB = new Q2Simulation(company).runWith(p1, p2);
+		Collection<Sales> q1Sales = new Q1Simulation().computeSalesOf(p1, p2);
+
 	}
 
 	private static Payroll buildPayroll() {
