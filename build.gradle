@@ -21,7 +21,7 @@ targetCompatibility = 1.8
 
 jar {
     manifest {
-        attributes("Main-Class": "br.senac.sp.calculus.ado5.VoltageTimeSeriesApp")
+        attributes("Main-Class": "br.senac.sp.probabilidade.Application")
     }
     from {
         configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
