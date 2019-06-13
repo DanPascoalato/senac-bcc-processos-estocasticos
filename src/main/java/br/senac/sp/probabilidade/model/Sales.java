@@ -44,6 +44,10 @@ public class Sales {
 			.reduce(0.0, (a,b) -> a+b);
 	}
 
+	public Double getProfitSubtotal() {
+		return getRevenueSubtotal() - getCostSubtotal();
+	}
+
 	public List<Item> getItems() {
 		return items;
 	}

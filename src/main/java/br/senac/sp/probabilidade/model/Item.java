@@ -18,6 +18,10 @@ public class Item {
 		return product.getProductionCost() * quantity;
 	}
 
+	public Double getProfitSubtotal() {
+		return getRevenueSubtotal() - getCostSubtotal();
+	}
+
 	public Product getProduct() {
 		return product;
 	}
