@@ -1,8 +1,9 @@
 package br.senac.sp.probabilidade;
 
 import br.senac.sp.probabilidade.model.*;
-
-import java.time.Month;
+import br.senac.sp.probabilidade.question.Q1Simulation;
+import br.senac.sp.probabilidade.question.Q2Simulation;
+import br.senac.sp.probabilidade.question.Simulation;
 
 public class Application {
 
@@ -22,23 +23,14 @@ public class Application {
 			.unitPrice(70.00)
 			.build();
 
-		Sales janSales = Sales.of(Month.JANUARY)
-			.addItem(new Item(p1, 10))
-			.addItem(new Item(p2, 5));
-
-		Sales febSales = Sales.of(Month.FEBRUARY)
-			.addItem(new Item(p1, 10))
-			.addItem(new Item(p2, 5));
-
 		Company company = Company.builder()
 			.capacity(400)
 			.expenses(buildExpenses())
 			.payroll(buildPayroll())
-			.sales(janSales)
-			.sales(febSales)
 			.build();
 
-		System.out.println();
+		Simulation simA = new Q1Simulation(company).runWith(p1, p2);
+		Simulation simB = new Q2Simulation(company).runWith(p1, p2);
 	}
 
 	private static Payroll buildPayroll() {
