@@ -31,7 +31,8 @@ public class Application {
 			.build();
 
 		Collection<Sales> q1Sales = new Q1Simulation().computeSalesOf(p1, p2);
-		Collection<Sales> q2Sales = new Q2Simulation().computeSalesOf(p1, p2);
+		Collection<Sales> q2Sales = new Q2Simulation(company).computeSalesOf(p1, p2);
+		//TODO: Log & Report
 	}
 
 	private static Payroll buildPayroll() {
