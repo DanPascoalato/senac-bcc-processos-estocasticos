@@ -27,6 +27,11 @@ public class Sales {
 		return this;
 	}
 
+	public Sales addItem(Product product, Integer quantity) {
+		items.add(new Item(product, quantity));
+		return this;
+	}
+
 	public Double getRevenueSubtotal() {
 		return items.stream()
 			.map(Item::getRevenueSubtotal)
