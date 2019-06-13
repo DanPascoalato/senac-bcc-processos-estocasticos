@@ -10,7 +10,7 @@ public class Company {
 	private Payroll payroll;
 	private List<Sales> sales;
 
-	private Company(Integer capacity, Expenses expenses, Payroll payroll, List<Sales> sales) {
+	public Company(Integer capacity, Expenses expenses, Payroll payroll, List<Sales> sales) {
 		this.capacity = capacity;
 		this.expenses = expenses;
 		this.payroll = payroll;
@@ -52,7 +52,6 @@ public class Company {
 		return capacity;
 	}
 
-
 	public static Builder builder() {
 		return new Builder();
 	}
@@ -80,6 +79,11 @@ public class Company {
 
 		public Builder sales(Sales sales) {
 			this.sales.add(sales);
+			return this;
+		}
+
+		public Builder totalSales(List<Sales> sales) {
+			this.sales = sales;
 			return this;
 		}
 
