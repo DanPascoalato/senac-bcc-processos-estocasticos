@@ -52,6 +52,10 @@ public class Company {
 		return capacity;
 	}
 
+	public List<Sales> getSales() {
+		return sales;
+	}
+
 	public static Builder builder() {
 		return new Builder();
 	}
