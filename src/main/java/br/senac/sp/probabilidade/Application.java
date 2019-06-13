@@ -24,12 +24,11 @@ public class Application {
 
 		Sales janSales = Sales.of(Month.JANUARY)
 			.addItem(new Item(p1, 10))
-			.addItem(new Item(p2, 10));
+			.addItem(new Item(p2, 5));
 
 		Sales febSales = Sales.of(Month.FEBRUARY)
 			.addItem(new Item(p1, 10))
-			.addItem(new Item(p2, 10));
-
+			.addItem(new Item(p2, 5));
 
 		Company company = Company.builder()
 			.capacity(400)
@@ -40,8 +39,6 @@ public class Application {
 			.build();
 
 		System.out.println();
-
-
 	}
 
 	private static Payroll buildPayroll() {
