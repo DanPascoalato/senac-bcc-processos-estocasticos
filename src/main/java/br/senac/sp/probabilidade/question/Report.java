@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.Month;
 
 public class Report {
 
@@ -23,28 +24,28 @@ public class Report {
 
 			.append("P1 (units_sold)").append(";")
 			.append("P1 (unit_price)").append(";")
-			.append("P1 (revenue_subtotal)").append(";")
 			.append("P1 (unit_cost)").append(";")
+			.append("P1 (revenue_subtotal)").append(";")
 			.append("P1 (cost_subtotal)").append(";")
 			.append("P1 (profit_subtotal)").append(";")
 
 			.append("P2 (units_sold)").append(";")
 			.append("P2 (unit_price)").append(";")
-			.append("P2 (revenue_subtotal)").append(";")
 			.append("P2 (unit_cost)").append(";")
+			.append("P2 (revenue_subtotal)").append(";")
 			.append("P2 (cost_subtotal)").append(";")
 			.append("P2 (profit_subtotal)").append(";")
 
-			.append("Total Units Sold").append(";")
-			.append("Total Revenue").append(";")
-			.append("Total Cost").append(";")
-			.append("Total Profit").append(";")
+			.append("Sales Units Sold").append(";")
+			.append("Sales Revenue").append(";")
+			.append("Sales Production Cost").append(";")
+			.append("Sales Profit").append(";")
 
 			.append("Payroll").append(";")
 			.append("Other Expenses").append(";")
 
-			.append("Overall Costs").append(";")
-			.append("Overall Profit").append("\n")
+			.append("Overall Monthly Costs").append(";")
+			.append("Overall Monthly Profit").append("\n")
 			.toString().getBytes();
 	}
 
@@ -54,28 +55,29 @@ public class Report {
 	private static byte[] buildData(Company company) {
 		StringBuilder sb = new StringBuilder();
 
-		company.getSales().forEach(sales -> {
-			sb.append(sales.getMonth()).append(";");
+		company.getSales().forEach(monthlySales -> {
+			sb.append(monthlySales.getMonth()).append(";");
 
-			sales.getItems().forEach(item ->
+			monthlySales.getItems().forEach(item ->
 				sb.append(item.getQuantity()).append(";")
 					.append(item.getProduct().getUnitPrice()).append(";")
-					.append(item.getRevenueSubtotal()).append(";")
 					.append(item.getProduct().getProductionCost()).append(";")
+					.append(item.getRevenueSubtotal()).append(";")
 					.append(item.getCostSubtotal()).append(";")
 					.append(item.getProfitSubtotal()).append(";")
 			);
 
-			sb.append(sales.getUnitsSold()).append(";")
-				.append(sales.getRevenueSubtotal()).append(";")
-				.append(sales.getCostSubtotal()).append(";")
-				.append(sales.getProfitSubtotal()).append(";");
+			sb.append(monthlySales.getUnitsSold()).append(";")
+				.append(monthlySales.getRevenueSubtotal()).append(";")
+				.append(monthlySales.getCostSubtotal()).append(";")
+				.append(monthlySales.getProfitSubtotal()).append(";");
 
-			sb.append(company.getPayroll().getSubtotal()).append(";")
-				.append(company.getExpenses().getSubtotal()).append(";");
+			sb.append(company.getMonthlyPayroll().getSubtotal()).append(";")
+				.append(company.getMonthlyExpenses().getSubtotal()).append(";");
 
-			sb.append(company.getTotalCosts()).append(";")
-				.append(company.getTotalProfit()).append("\n");
+			Month month = monthlySales.getMonth();
+			sb.append(company.getOverallCostsIn(month)).append(";")
+				.append(company.getProfitIn(month)).append("\n");
 		});
 
 		return sb.toString().getBytes();
