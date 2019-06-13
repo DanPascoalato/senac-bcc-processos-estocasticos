@@ -10,8 +10,12 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public Double getSubtotal() {
+	public Double getRevenueSubtotal() {
 		return product.getUnitPrice() * quantity;
+	}
+
+	public Double getCostSubtotal() {
+		return product.getProductionCost() * quantity;
 	}
 
 	public Product getProduct() {
