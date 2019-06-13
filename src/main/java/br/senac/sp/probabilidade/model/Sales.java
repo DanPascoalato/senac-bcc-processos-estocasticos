@@ -29,13 +29,13 @@ public class Sales {
 
 	public Double getRevenueSubtotal() {
 		return items.stream()
-			.map(Item::getSubtotal)
+			.map(Item::getRevenueSubtotal)
 			.reduce(0.0, (a,b) -> a+b);
 	}
 
 	public Double getCostSubtotal() {
 		return items.stream()
-			.map(item -> item.getProduct().getProductionCost())
+			.map(Item::getCostSubtotal)
 			.reduce(0.0, (a,b) -> a+b);
 	}
 
