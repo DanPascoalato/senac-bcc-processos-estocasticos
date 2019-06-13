@@ -32,16 +32,22 @@ public class Sales {
 		return this;
 	}
 
+	public Integer getUnitsSold() {
+		return items.stream()
+			.map(Item::getQuantity)
+			.reduce(0, (a, b) -> a + b);
+	}
+
 	public Double getRevenueSubtotal() {
 		return items.stream()
 			.map(Item::getRevenueSubtotal)
-			.reduce(0.0, (a,b) -> a+b);
+			.reduce(0.0, (a, b) -> a + b);
 	}
 
 	public Double getCostSubtotal() {
 		return items.stream()
 			.map(Item::getCostSubtotal)
-			.reduce(0.0, (a,b) -> a+b);
+			.reduce(0.0, (a, b) -> a + b);
 	}
 
 	public Double getProfitSubtotal() {
