@@ -10,15 +10,15 @@ import java.util.List;
 
 public class Q2Simulation implements Simulation {
 
+	private Company company;
 	private final static Integer FIRST_MONTH_SALES = 300;
-	private final Integer MAX_CAPACITY;
 
 	public Q2Simulation(Company company) {
-		this.MAX_CAPACITY = company.getCapacity();
+		this.company = company;
 	}
 
 	@Override
-	public List<Sales> computeSalesOf(Product... products) {
+	public Company computeSalesOf(Product... products) {
 		Product p1 = products[0];
 		Product p2 = products[1];
 
@@ -33,15 +33,17 @@ public class Q2Simulation implements Simulation {
 			totalSales = salesVariance(totalSales);
 		}
 
-		return sales;
+		return new Company(company.getCapacity(), company.getExpenses(), company.getPayroll(), sales);
 	}
 
 	private Integer salesVariance(Integer totalSales) {
 		Integer rng = Simulation.rng(100);
+
 		if (rng >= 0 && rng <= 50) {
 			int _totalSales = Math.round(totalSales * 1.1f);
-			return (_totalSales > MAX_CAPACITY) ? MAX_CAPACITY : _totalSales;
+			return (_totalSales > company.getCapacity()) ? company.getCapacity() : _totalSales;
 		}
+
 		return Math.round(totalSales * 0.9f);
 	}
 

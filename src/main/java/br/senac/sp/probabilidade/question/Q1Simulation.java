@@ -1,5 +1,6 @@
 package br.senac.sp.probabilidade.question;
 
+import br.senac.sp.probabilidade.model.Company;
 import br.senac.sp.probabilidade.model.Product;
 import br.senac.sp.probabilidade.model.Sales;
 
@@ -10,11 +11,16 @@ import java.util.stream.IntStream;
 
 public class Q1Simulation implements Simulation {
 
+	private Company company;
 	private final static Integer FIRST_MONTH_SALES = 250;
 	private final static Integer THIRD_MONTH_SALES = 320;
 
+	public Q1Simulation(Company company) {
+		this.company = company;
+	}
+
 	@Override
-	public List<Sales> computeSalesOf(Product... products) {
+	public Company computeSalesOf(Product... products) {
 		Product p1 = products[0];
 		Product p2 = products[1];
 
@@ -36,7 +42,7 @@ public class Q1Simulation implements Simulation {
 
 		sales.add(0, janSales);
 		sales.add(1, febSales);
-		return sales;
+		return new Company(company.getCapacity(), company.getExpenses(), company.getPayroll(), sales);
 	}
 
 }
