@@ -1,15 +1,25 @@
 package br.senac.sp.probabilidade;
 
-import br.senac.sp.probabilidade.model.Company;
-import br.senac.sp.probabilidade.model.Expenses;
-import br.senac.sp.probabilidade.model.Payroll;
-import br.senac.sp.probabilidade.model.Product;
+import br.senac.sp.probabilidade.model.*;
 
 public class Application {
 
 	public static void main(String[] args) {
-		Product p1 = new Product(2, 1);
-		Product p2 = new Product(2, 3);
+		Component componentA = new Component("A", 15.00);
+		Component componentB = new Component("B", 25.00);
+
+		Product p1 = Product.builder()
+			.component(componentA, 2)
+			.component(componentB, 1)
+			.unitPrice(70.00)
+			.build();
+
+		Product p2 = Product.builder()
+			.component(componentA, 2)
+			.component(componentB, 3)
+			.unitPrice(70.00)
+			.build();
+
 		Company company = Company.builder()
 			.capacity(400)
 			.expenses(buildExpenses())
