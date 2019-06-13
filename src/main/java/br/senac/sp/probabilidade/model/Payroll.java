@@ -26,7 +26,7 @@ public class Payroll {
 		this.numberOfDirectors = numberOfDirectors;
 	}
 
-	private Double getSubtotal() {
+	public Double getSubtotal() {
 		return Stream.of(
 			productionLineSalary * employeesInProduction,
 			administrationSalary * employeesInAdmin,
