@@ -4,7 +4,6 @@ import br.senac.sp.probabilidade.model.Product;
 import br.senac.sp.probabilidade.model.Sales;
 
 import java.time.Month;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -15,7 +14,7 @@ public class Q1Simulation implements Simulation {
 	private final static Integer THIRD_MONTH_SALES = 320;
 
 	@Override
-	public Collection<Sales> computeSalesOf(Product... products) {
+	public List<Sales> computeSalesOf(Product... products) {
 		Product p1 = products[0];
 		Product p2 = products[1];
 

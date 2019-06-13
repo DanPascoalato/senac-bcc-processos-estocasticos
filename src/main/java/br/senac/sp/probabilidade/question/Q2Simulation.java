@@ -6,7 +6,6 @@ import br.senac.sp.probabilidade.model.Sales;
 
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Q2Simulation implements Simulation {
@@ -19,7 +18,7 @@ public class Q2Simulation implements Simulation {
 	}
 
 	@Override
-	public Collection<Sales> computeSalesOf(Product... products) {
+	public List<Sales> computeSalesOf(Product... products) {
 		Product p1 = products[0];
 		Product p2 = products[1];
 
