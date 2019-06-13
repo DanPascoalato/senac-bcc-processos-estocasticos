@@ -5,9 +5,11 @@ import br.senac.sp.probabilidade.question.Q1Simulation;
 import br.senac.sp.probabilidade.question.Q2Simulation;
 import br.senac.sp.probabilidade.question.Report;
 
+import java.io.IOException;
+
 public class Application {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Component componentA = new Component("A", 15.00);
 		Component componentB = new Component("B", 25.00);
 
