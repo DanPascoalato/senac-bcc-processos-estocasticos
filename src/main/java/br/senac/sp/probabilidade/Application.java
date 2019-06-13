@@ -2,6 +2,7 @@ package br.senac.sp.probabilidade;
 
 import br.senac.sp.probabilidade.model.*;
 import br.senac.sp.probabilidade.question.Q1Simulation;
+import br.senac.sp.probabilidade.question.Q2Simulation;
 
 import java.util.Collection;
 
@@ -30,7 +31,7 @@ public class Application {
 			.build();
 
 		Collection<Sales> q1Sales = new Q1Simulation().computeSalesOf(p1, p2);
-
+		Collection<Sales> q2Sales = new Q2Simulation().computeSalesOf(p1, p2);
 	}
 
 	private static Payroll buildPayroll() {
