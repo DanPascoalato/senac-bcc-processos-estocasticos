@@ -1,5 +1,7 @@
 package br.senac.sp.probabilidade.model;
 
+import java.util.stream.Stream;
+
 public class Payroll {
 
 	private Double productionLineSalary;
@@ -22,6 +24,15 @@ public class Payroll {
 		this.employeesInAdmin = employeesInAdmin;
 		this.employeesInGS = employeesInGS;
 		this.numberOfDirectors = numberOfDirectors;
+	}
+
+	private Double getSubtotal() {
+		return Stream.of(
+			productionLineSalary * employeesInProduction,
+			administrationSalary * employeesInAdmin,
+			generalServicesSalary * employeesInGS,
+			directorSalary * numberOfDirectors
+		).reduce(0.0, (a, b) -> a + b);
 	}
 
 	public Double getProductionLineSalary() {

@@ -12,6 +12,10 @@ public class Expenses {
 		this.waterSewerBill = waterSewerBill;
 	}
 
+	public Double getSubtotal() {
+		return rent + electricityBill + waterSewerBill;
+	}
+
 	public Double getRent() {
 		return rent;
 	}
