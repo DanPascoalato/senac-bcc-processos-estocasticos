@@ -27,15 +27,15 @@ public class Sales {
 		return this;
 	}
 
-	public Double getTotalCost() {
+	public Double getRevenueSubtotal() {
 		return items.stream()
-			.map(item -> item.getProduct().getProductionCost())
+			.map(Item::getSubtotal)
 			.reduce(0.0, (a,b) -> a+b);
 	}
 
-	public Double getTotalRevenue() {
+	public Double getCostSubtotal() {
 		return items.stream()
-			.map(Item::getSubtotal)
+			.map(item -> item.getProduct().getProductionCost())
 			.reduce(0.0, (a,b) -> a+b);
 	}
 
