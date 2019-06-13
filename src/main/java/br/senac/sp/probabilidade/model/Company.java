@@ -1,51 +1,43 @@
 package br.senac.sp.probabilidade.model;
 
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Company {
 
 	private Integer capacity;
-	private Expenses expenses;
-	private Payroll payroll;
+	private Expenses monthlyExpenses;
+	private Payroll monthlyPayroll;
 	private List<Sales> sales;
 
-	public Company(Integer capacity, Expenses expenses, Payroll payroll, List<Sales> sales) {
+	public Company(Integer capacity, Expenses monthlyExpenses, Payroll monthlyPayroll, List<Sales> sales) {
 		this.capacity = capacity;
-		this.expenses = expenses;
-		this.payroll = payroll;
+		this.monthlyExpenses = monthlyExpenses;
+		this.monthlyPayroll = monthlyPayroll;
 		this.sales = sales;
 	}
 
-	public Double getTotalProfit() {
-		return getTotalRevenue() - getTotalCosts();
+	public Double getProfitIn(Month month) {
+		return getRevenueIn(month) - getOverallCostsIn(month);
 	}
 
-	public Double getTotalRevenue() {
-		return sales.stream()
-			.map(Sales::getRevenueSubtotal)
-			.reduce(0.0, (a,b) -> a+b);
+	public Double getRevenueIn(Month month) {
+		return sales.get(month.getValue()-1).getRevenueSubtotal();
 	}
 
-	public Double getTotalCosts() {
-		return getTotalProductionCosts() +
-			getExpenses().getSubtotal() +
-			getPayroll().getSubtotal();
+	public Double getOverallCostsIn(Month month) {
+		return sales.get(month.getValue()-1).getCostSubtotal()
+			+ getMonthlyExpenses().getSubtotal()
+			+ getMonthlyPayroll().getSubtotal();
 	}
 
-
-	public Double getTotalProductionCosts() {
-		return sales.stream()
-			.map(Sales::getCostSubtotal)
-			.reduce(0.0, (a,b) -> a+b);
+	public Expenses getMonthlyExpenses() {
+		return monthlyExpenses;
 	}
 
-	public Expenses getExpenses() {
-		return expenses;
-	}
-
-	public Payroll getPayroll() {
-		return payroll;
+	public Payroll getMonthlyPayroll() {
+		return monthlyPayroll;
 	}
 
 	public Integer getCapacity() {
