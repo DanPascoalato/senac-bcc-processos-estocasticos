@@ -33,7 +33,7 @@ public class Q2Simulation implements Simulation {
 			totalSales = salesVariance(totalSales);
 		}
 
-		return new Company(company.getCapacity(), company.getExpenses(), company.getPayroll(), sales);
+		return new Company(company.getCapacity(), company.getMonthlyExpenses(), company.getMonthlyPayroll(), sales);
 	}
 
 	private Integer salesVariance(Integer totalSales) {

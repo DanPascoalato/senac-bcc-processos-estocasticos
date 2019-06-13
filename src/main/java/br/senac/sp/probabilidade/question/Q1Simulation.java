@@ -42,7 +42,7 @@ public class Q1Simulation implements Simulation {
 
 		sales.add(0, janSales);
 		sales.add(1, febSales);
-		return new Company(company.getCapacity(), company.getExpenses(), company.getPayroll(), sales);
+		return new Company(company.getCapacity(), company.getMonthlyExpenses(), company.getMonthlyPayroll(), sales);
 	}
 
 }
