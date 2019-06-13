@@ -39,7 +39,7 @@ public class Q2Simulation implements Simulation {
 
 	private Integer salesVariance(Integer totalSales) {
 		Integer rng = Simulation.rng(100);
-		if (rng >= 0 && rng <= 100) {
+		if (rng >= 0 && rng <= 50) {
 			int _totalSales = Math.round(totalSales * 1.1f);
 			return (_totalSales > MAX_CAPACITY) ? MAX_CAPACITY : _totalSales;
 		}
