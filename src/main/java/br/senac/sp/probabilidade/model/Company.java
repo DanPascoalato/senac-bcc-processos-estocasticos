@@ -5,6 +5,7 @@ public class Company {
 	private Integer capacity;
 	private Expenses expenses;
 	private Payroll payroll;
+	private Sales sales;
 
 	private Company(Integer capacity, Expenses expenses, Payroll payroll) {
 		this.capacity = capacity;
@@ -12,8 +13,20 @@ public class Company {
 		this.payroll = payroll;
 	}
 
-	public Integer getCapacity() {
-		return capacity;
+	public Double getTotalRevenue() {
+		return sales.getTotalRevenue();
+	}
+
+	public Double getProfit() {
+		return getTotalRevenue() - getTotalCosts();
+	}
+
+	public Double getTotalCosts() {
+		return getProductionCosts() + getExpenses().getSubtotal() + getPayroll().getSubtotal();
+	}
+
+	public Double getProductionCosts() {
+		return sales.getTotalCost();
 	}
 
 	public Expenses getExpenses() {
@@ -23,6 +36,11 @@ public class Company {
 	public Payroll getPayroll() {
 		return payroll;
 	}
+
+	public Integer getCapacity() {
+		return capacity;
+	}
+
 
 	public static Builder builder() {
 		return new Builder();
