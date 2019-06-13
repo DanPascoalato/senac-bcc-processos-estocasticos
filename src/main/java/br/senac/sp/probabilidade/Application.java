@@ -3,8 +3,7 @@ package br.senac.sp.probabilidade;
 import br.senac.sp.probabilidade.model.*;
 import br.senac.sp.probabilidade.question.Q1Simulation;
 import br.senac.sp.probabilidade.question.Q2Simulation;
-
-import java.util.Collection;
+import br.senac.sp.probabilidade.question.Report;
 
 public class Application {
 
@@ -30,9 +29,11 @@ public class Application {
 			.payroll(buildPayroll())
 			.build();
 
-		Collection<Sales> q1Sales = new Q1Simulation().computeSalesOf(p1, p2);
-		Collection<Sales> q2Sales = new Q2Simulation(company).computeSalesOf(p1, p2);
-		//TODO: Log & Report
+		Company companySimA = new Q1Simulation(company).computeSalesOf(p1, p2);
+		Company companySimB = new Q2Simulation(company).computeSalesOf(p1, p2);
+
+		Report.generateReport(companySimA, "processos-estocasticos-p2-q5a.csv");
+		Report.generateReport(companySimB, "processos-estocasticos-p2-q5b.csv");
 	}
 
 	private static Payroll buildPayroll() {
