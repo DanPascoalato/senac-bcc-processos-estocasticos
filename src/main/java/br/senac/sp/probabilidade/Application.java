@@ -2,6 +2,8 @@ package br.senac.sp.probabilidade;
 
 import br.senac.sp.probabilidade.model.*;
 
+import java.time.Month;
+
 public class Application {
 
 	public static void main(String[] args) {
@@ -20,11 +22,24 @@ public class Application {
 			.unitPrice(70.00)
 			.build();
 
+		Sales janSales = Sales.of(Month.JANUARY)
+			.addItem(new Item(p1, 10))
+			.addItem(new Item(p2, 10));
+
+		Sales febSales = Sales.of(Month.FEBRUARY)
+			.addItem(new Item(p1, 10))
+			.addItem(new Item(p2, 10));
+
+
 		Company company = Company.builder()
 			.capacity(400)
 			.expenses(buildExpenses())
 			.payroll(buildPayroll())
+			.sales(janSales)
+			.sales(febSales)
 			.build();
+
+		System.out.println();
 
 
 	}
