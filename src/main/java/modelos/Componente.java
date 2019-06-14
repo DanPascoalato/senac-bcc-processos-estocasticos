@@ -1,20 +1,20 @@
-package br.senac.sp.probabilidade.model;
+package modelos;
 
-public class Component {
+public class Componente {
 
-	private String name;
-	private Double productionCost;
+	private String nome;
+	private Double custoProducao;
 
-	public Component(String name, Double productionCost) {
-		this.name = name;
-		this.productionCost = productionCost;
+	public Componente(String nome, Double custoProducao) {
+		this.nome = nome;
+		this.custoProducao = custoProducao;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public Double getProductionCost() {
-		return productionCost;
+	public Double getGastoProducao() {
+		return custoProducao;
 	}
 }

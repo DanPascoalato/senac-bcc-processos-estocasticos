@@ -1,43 +1,43 @@
-package br.senac.sp.probabilidade.question;
-
-import br.senac.sp.probabilidade.model.Company;
-import br.senac.sp.probabilidade.model.Product;
-import br.senac.sp.probabilidade.model.Sales;
+package simuladores;
 
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Q2Simulation implements Simulation {
+import modelos.Empresa;
+import modelos.Produto;
+import modelos.Vendas;
 
-	private Company company;
+public class Simulacao2 implements Basesimulacao {
+
+	private Empresa company;
 	private final static Integer FIRST_MONTH_SALES = 300;
 
-	public Q2Simulation(Company company) {
+	public Simulacao2(Empresa company) {
 		this.company = company;
 	}
 
 	@Override
-	public Company computeSalesOf(Product... products) {
-		Product p1 = products[0];
-		Product p2 = products[1];
+	public Empresa calculeVendasde(Produto... products) {
+		Produto p1 = products[0];
+		Produto p2 = products[1];
 
 		Integer totalSales = FIRST_MONTH_SALES;
-		List<Sales> sales = new ArrayList<>();
+		List<Vendas> sales = new ArrayList<>();
 
 		for (Month month : Month.values()) {
-			Integer p1Sales = Simulation.rng(totalSales);
-			sales.add(Sales.of(month)
+			Integer p1Sales = Basesimulacao.rng(totalSales);
+			sales.add(Vendas.of(month)
 				.addItem(p1, p1Sales)
 				.addItem(p2, totalSales - p1Sales));
 			totalSales = salesVariance(totalSales);
 		}
 
-		return new Company(company.getCapacity(), company.getMonthlyExpenses(), company.getMonthlyPayroll(), sales);
+		return new Empresa(company.getCapacity(), company.getMonthlyExpenses(), company.getMonthlyPayroll(), sales);
 	}
 
 	private Integer salesVariance(Integer totalSales) {
-		Integer rng = Simulation.rng(100);
+		Integer rng = Basesimulacao.rng(100);
 
 		if (rng >= 0 && rng <= 50) {
 			int _totalSales = Math.round(totalSales * 1.1f);

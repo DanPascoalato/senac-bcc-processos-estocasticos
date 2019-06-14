@@ -1,91 +1,90 @@
-package br.senac.sp.probabilidade.model;
+package modelos;
 
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Company {
+public class Empresa {
 
-	private Integer capacity;
-	private Expenses monthlyExpenses;
-	private Payroll monthlyPayroll;
-	private List<Sales> sales;
+	private Integer capacidade;
+	private Gastos gastosMensais;
+	private Salário salarioMensal;
+	private List<Vendas> vendas;
 
-	public Company(Integer capacity, Expenses monthlyExpenses, Payroll monthlyPayroll, List<Sales> sales) {
-		this.capacity = capacity;
-		this.monthlyExpenses = monthlyExpenses;
-		this.monthlyPayroll = monthlyPayroll;
-		this.sales = sales;
+	public Empresa(Integer capacidade, Gastos gastosMensais, Salário salarioMensal, List<Vendas> vendas) {
+		this.capacidade = capacidade;
+		this.gastosMensais = gastosMensais;
+		this.salarioMensal = salarioMensal;
+		this.vendas = vendas;
 	}
 
-	public Double getProfitIn(Month month) {
-		return getRevenueIn(month) - getOverallCostsIn(month);
+	public Double getLucroem(Month mes) {
+		return getGanhoem(mes) - getCustoTotalem(mes);
 	}
 
-	public Double getRevenueIn(Month month) {
-		return sales.get(month.getValue()-1).getRevenueSubtotal();
+	public Double getGanhoem(Month mes) {
+		return vendas.get(mes.getValue()-1).getGanhoSub();
 	}
 
-	public Double getOverallCostsIn(Month month) {
-		return sales.get(month.getValue()-1).getCostSubtotal()
+	public Double getCustoTotalem(Month mes) {
+		return vendas.get(mes.getValue()-1).getGastoSub()
 			+ getMonthlyExpenses().getSubtotal()
 			+ getMonthlyPayroll().getSubtotal();
 	}
 
-	public Expenses getMonthlyExpenses() {
-		return monthlyExpenses;
+	public Gastos getMonthlyExpenses() {
+		return gastosMensais;
 	}
 
-	public Payroll getMonthlyPayroll() {
-		return monthlyPayroll;
+	public Salário getMonthlyPayroll() {
+		return salarioMensal;
 	}
 
 	public Integer getCapacity() {
-		return capacity;
+		return capacidade;
 	}
 
-	public List<Sales> getSales() {
-		return sales;
+	public List<Vendas> getSales() {
+		return vendas;
 	}
 
-	public static Builder builder() {
-		return new Builder();
+	public static Construtor construtor() {
+		return new Construtor();
 	}
 
-	public static class Builder {
-		private Integer capacity;
-		private Expenses expenses;
-		private Payroll payroll;
-		private List<Sales> sales = new ArrayList<>();
+	public static class Construtor {
+		private Integer capacidade;
+		private Gastos gastos;
+		private Salário salario;
+		private List<Vendas> vendas = new ArrayList<>();
 
-		public Builder capacity(Integer capacity) {
-			this.capacity = capacity;
+		public Construtor capacidade(Integer capacidade) {
+			this.capacidade = capacidade;
 			return this;
 		}
 
-		public Builder expenses(Expenses expenses) {
-			this.expenses = expenses;
+		public Construtor gastos(Gastos gastos) {
+			this.gastos = gastos;
 			return this;
 		}
 
-		public Builder payroll(Payroll payroll) {
-			this.payroll = payroll;
+		public Construtor salario(Salário salario) {
+			this.salario = salario;
 			return this;
 		}
 
-		public Builder sales(Sales sales) {
-			this.sales.add(sales);
+		public Construtor vendas(Vendas vendas) {
+			this.vendas.add(vendas);
 			return this;
 		}
 
-		public Builder totalSales(List<Sales> sales) {
-			this.sales = sales;
+		public Construtor tatalVendas(List<Vendas> vendas) {
+			this.vendas = vendas;
 			return this;
 		}
 
-		public Company build() {
-			return new Company(capacity, expenses, payroll, sales);
+		public Empresa build() {
+			return new Empresa(capacidade, gastos, salario, vendas);
 		}
 	}
-
 }

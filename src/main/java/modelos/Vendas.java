@@ -1,57 +1,57 @@
-package br.senac.sp.probabilidade.model;
+package modelos;
 
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sales {
+public class Vendas {
 
 	private List<Item> items;
-	private Month month;
+	private Month mes;
 
-	private Sales(List<Item> items, Month month) {
-		this.items = items;
-		this.month = month;
+	private Vendas(List<Item> itens, Month mes) {
+		this.items = itens;
+		this.mes = mes;
 	}
 
-	public static Sales of(Month month) {
-		return new Sales(new ArrayList<>(), month);
+	public static Vendas of(Month mes) {
+		return new Vendas(new ArrayList<>(), mes);
 	}
 
-	public static Sales of(Integer month) {
-		return new Sales(new ArrayList<>(), Month.of(month));
+	public static Vendas of(Integer mes) {
+		return new Vendas(new ArrayList<>(), Month.of(mes));
 	}
 
-	public Sales addItem(Item item) {
+	public Vendas addItem(Item item) {
 		items.add(item);
 		return this;
 	}
 
-	public Sales addItem(Product product, Integer quantity) {
-		items.add(new Item(product, quantity));
+	public Vendas addItem(Produto produto, Integer quantidade) {
+		items.add(new Item(produto, quantidade));
 		return this;
 	}
 
-	public Integer getUnitsSold() {
+	public Integer getUnidadesVendidas() {
 		return items.stream()
-			.map(Item::getQuantity)
+			.map(Item::getQuantidade)
 			.reduce(0, (a, b) -> a + b);
 	}
 
-	public Double getRevenueSubtotal() {
+	public Double getGanhoSub() {
 		return items.stream()
-			.map(Item::getRevenueSubtotal)
+			.map(Item::getGanhoSub)
 			.reduce(0.0, (a, b) -> a + b);
 	}
 
-	public Double getCostSubtotal() {
+	public Double getGastoSub() {
 		return items.stream()
-			.map(Item::getCostSubtotal)
+			.map(Item::getGastoSub)
 			.reduce(0.0, (a, b) -> a + b);
 	}
 
-	public Double getProfitSubtotal() {
-		return getRevenueSubtotal() - getCostSubtotal();
+	public Double getLucroSub() {
+		return getGanhoSub() - getGastoSub();
 	}
 
 	public List<Item> getItems() {
@@ -59,6 +59,6 @@ public class Sales {
 	}
 
 	public Month getMonth() {
-		return month;
+		return mes;
 	}
 }

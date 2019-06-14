@@ -1,70 +1,70 @@
-package br.senac.sp.probabilidade.model;
+package modelos;
 
 import java.util.stream.Stream;
 
-public class Payroll {
+public class Salário {
 
-	private Double productionLineSalary;
-	private Double administrationSalary;
-	private Double generalServicesSalary;
-	private Double directorSalary;
-	private Integer employeesInProduction;
-	private Integer employeesInAdmin;
-	private Integer employeesInGS;
-	private Integer numberOfDirectors;
+	private Double salarioLinhaProducao;
+	private Double salarioAdiministracao;
+	private Double salarioServicosGerais;
+	private Double salarioDiretor;
+	private Integer funcionarioProducao;
+	private Integer funcionarioAdiministracao;
+	private Integer funcionarioGS;
+	private Integer numerodeDiretores;
 
 
-	private Payroll(Double productionLineSalary, Double administrationSalary, Double generalServicesSalary, Double directorSalary,
-	                Integer employeesInProduction, Integer employeesInAdmin, Integer employeesInGS, Integer numberOfDirectors) {
-		this.productionLineSalary = productionLineSalary;
-		this.administrationSalary = administrationSalary;
-		this.generalServicesSalary = generalServicesSalary;
-		this.directorSalary = directorSalary;
-		this.employeesInProduction = employeesInProduction;
-		this.employeesInAdmin = employeesInAdmin;
-		this.employeesInGS = employeesInGS;
-		this.numberOfDirectors = numberOfDirectors;
+	private Salário(Double salarioLinhaProducao, Double salarioAdiministracao, Double salarioServicosGerais, Double salarioDiretor,
+	                Integer funcionarioProducao, Integer funcionarioAdiministracao, Integer funcionarioGS, Integer numerodeDiretores) {
+		this.salarioLinhaProducao = salarioLinhaProducao;
+		this.salarioAdiministracao = salarioAdiministracao;
+		this.salarioServicosGerais = salarioServicosGerais;
+		this.salarioDiretor = salarioDiretor;
+		this.funcionarioProducao = funcionarioProducao;
+		this.funcionarioAdiministracao = funcionarioAdiministracao;
+		this.funcionarioGS = funcionarioGS;
+		this.numerodeDiretores = numerodeDiretores;
 	}
 
 	public Double getSubtotal() {
 		return Stream.of(
-			productionLineSalary * employeesInProduction,
-			administrationSalary * employeesInAdmin,
-			generalServicesSalary * employeesInGS,
-			directorSalary * numberOfDirectors
+			salarioLinhaProducao * funcionarioProducao,
+			salarioAdiministracao * funcionarioAdiministracao,
+			salarioServicosGerais * funcionarioGS,
+			salarioDiretor * numerodeDiretores
 		).reduce(0.0, (a, b) -> a + b);
 	}
 
-	public Double getProductionLineSalary() {
-		return productionLineSalary;
+	public Double getsalarioLinhaProducao() {
+		return salarioLinhaProducao;
 	}
 
-	public Double getAdministrationSalary() {
-		return administrationSalary;
+	public Double getsalarioAdiministracao() {
+		return salarioAdiministracao;
 	}
 
-	public Double getGeneralServicesSalary() {
-		return generalServicesSalary;
+	public Double getsalarioServicosGerais() {
+		return salarioServicosGerais;
 	}
 
-	public Double getDirectorSalary() {
-		return directorSalary;
+	public Double getsalarioDiretor() {
+		return salarioDiretor;
 	}
 
-	public Integer getEmployeesInProduction() {
-		return employeesInProduction;
+	public Integer getfuncionarioProducao() {
+		return funcionarioProducao;
 	}
 
-	public Integer getEmployeesInAdmin() {
-		return employeesInAdmin;
+	public Integer getfuncionarioAdiministracao() {
+		return funcionarioAdiministracao;
 	}
 
-	public Integer getEmployeesInGS() {
-		return employeesInGS;
+	public Integer getfuncionarioGS() {
+		return funcionarioGS;
 	}
 
-	public Integer getNumberOfDirectors() {
-		return numberOfDirectors;
+	public Integer getnumerodeDiretores() {
+		return numerodeDiretores;
 	}
 
 	public static Builder builder() {
@@ -73,58 +73,58 @@ public class Payroll {
 
 	public static class Builder {
 
-		private Double productionLineSalary;
-		private Double administrationSalary;
-		private Double generalServicesSalary;
-		private Double directorSalary;
-		private Integer employeesInProduction;
-		private Integer employeesInAdmin;
-		private Integer employeesInGS;
-		private Integer numberOfdirectors;
+		private Double salarioLinhaProducao;
+		private Double salarioAdiministracao;
+		private Double salarioServicosGerais;
+		private Double salarioDiretor;
+		private Integer funcionarioProducao;
+		private Integer funcionarioAdiministracao;
+		private Integer funcionarioGS;
+		private Integer numerodeDiretores;
 
-		public Builder productionLineSalary(Double salary) {
-			this.productionLineSalary = salary;
+		public Builder salarioLinhaProducao(Double salario) {
+			this.salarioLinhaProducao = salario;
 			return this;
 		}
 
 		public Builder administrationalary(Double salary) {
-			this.administrationSalary = salary;
+			this.salarioAdiministracao = salary;
 			return this;
 		}
 
 		public Builder generalServicesSalary(Double salary) {
-			this.generalServicesSalary = salary;
+			this.salarioServicosGerais = salary;
 			return this;
 		}
 
-		public Builder directorSalary(Double salary) {
-			this.directorSalary = salary;
+		public Builder salarioDiretor(Double salario) {
+			this.salarioDiretor = salario;
 			return this;
 		}
 
-		public Builder employeesInProduction(Integer numberOfEmployees) {
-			this.employeesInProduction = numberOfEmployees;
+		public Builder funcionarioProducao(Integer numerodefuncionarios) {
+			this.funcionarioProducao = numerodefuncionarios;
 			return this;
 		}
 
-		public Builder employeesInAdmin(Integer numberOfEmployes) {
-			this.employeesInAdmin = numberOfEmployes;
+		public Builder funcionarioAdiministracao(Integer numerodefuncionarios) {
+			this.funcionarioAdiministracao = numerodefuncionarios;
 			return this;
 		}
 
 		public Builder employeesInGeneralServices(Integer numberOfEmployees) {
-			this.employeesInGS = numberOfEmployees;
+			this.funcionarioGS = numberOfEmployees;
 			return this;
 		}
 
 		public Builder numberOfDirectors(Integer numberOfDirectors) {
-			this.numberOfdirectors = numberOfDirectors;
+			this.numerodeDiretores = numberOfDirectors;
 			return this;
 		}
 
-		public Payroll build() {
-			return new Payroll(productionLineSalary, administrationSalary, generalServicesSalary, directorSalary,
-				employeesInProduction, employeesInAdmin, employeesInGS, numberOfdirectors);
+		public Salário construir() {
+			return new Salário(salarioLinhaProducao, salarioAdiministracao, salarioServicosGerais, salarioDiretor,
+				funcionarioProducao, funcionarioAdiministracao, funcionarioGS, numerodeDiretores);
 		}
 
 	}

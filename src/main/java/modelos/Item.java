@@ -1,32 +1,32 @@
-package br.senac.sp.probabilidade.model;
+package modelos;
 
 public class Item {
 
-	private Product product;
-	private Integer quantity;
+	private Produto produto;
+	private Integer quantidade;
 
-	public Item(Product product, Integer quantity) {
-		this.product = product;
-		this.quantity = quantity;
+	public Item(Produto produto, Integer quantidade) {
+		this.produto = produto;
+		this.quantidade = quantidade;
 	}
 
-	public Double getRevenueSubtotal() {
-		return product.getUnitPrice() * quantity;
+	public Double getGanhoSub() {
+		return produto.getPrecoUnidade() * quantidade;
 	}
 
-	public Double getCostSubtotal() {
-		return product.getProductionCost() * quantity;
+	public Double getGastoSub() {
+		return produto.getGastoProducao() * quantidade;
 	}
 
 	public Double getProfitSubtotal() {
-		return getRevenueSubtotal() - getCostSubtotal();
+		return getGanhoSub() - getGastoSub();
 	}
 
-	public Product getProduct() {
-		return product;
+	public Produto getProduct() {
+		return produto;
 	}
 
-	public Integer getQuantity() {
-		return quantity;
+	public Integer getQuantidade() {
+		return quantidade;
 	}
 }

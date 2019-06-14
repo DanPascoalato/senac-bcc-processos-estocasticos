@@ -1,48 +1,48 @@
-package br.senac.sp.probabilidade.question;
-
-import br.senac.sp.probabilidade.model.Company;
-import br.senac.sp.probabilidade.model.Product;
-import br.senac.sp.probabilidade.model.Sales;
+package simuladores;
 
 import java.time.Month;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Q1Simulation implements Simulation {
+import modelos.Empresa;
+import modelos.Produto;
+import modelos.Vendas;
 
-	private Company company;
-	private final static Integer FIRST_MONTH_SALES = 250;
-	private final static Integer THIRD_MONTH_SALES = 320;
+public class Simulacao1 implements Basesimulacao {
 
-	public Q1Simulation(Company company) {
-		this.company = company;
+	private Empresa empresa;
+	private final static Integer PRIMEIRO_MES = 250;
+	private final static Integer TERCEIRO_MES = 320;
+
+	public Simulacao1(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 	@Override
-	public Company computeSalesOf(Product... products) {
-		Product p1 = products[0];
-		Product p2 = products[1];
+	public Empresa calculeVendasde(Produto... produtos) {
+		Produto p1 = produtos[0];
+		Produto p2 = produtos[1];
 
-		Integer p1SalesInJan = Simulation.rng(FIRST_MONTH_SALES);
-		Sales janSales = Sales.of(Month.JANUARY)
-			.addItem(p1, p1SalesInJan)
-			.addItem(p2, FIRST_MONTH_SALES - p1SalesInJan);
+		Integer p1VendasemJan = Basesimulacao.rng(PRIMEIRO_MES);
+		Vendas janSales = Vendas.of(Month.JANUARY)
+			.addItem(p1, p1VendasemJan)
+			.addItem(p2, PRIMEIRO_MES - p1VendasemJan);
 
-		Sales febSales = Sales.of(Month.FEBRUARY)
-			.addItem(p1, Double.valueOf(janSales.getItems().get(0).getQuantity() * 1.1).intValue())
-			.addItem(p2, Double.valueOf(janSales.getItems().get(1).getQuantity() * 1.1).intValue());
+		Vendas febSales = Vendas.of(Month.FEBRUARY)
+			.addItem(p1, Double.valueOf(janSales.getItems().get(0).getQuantidade() * 1.1).intValue())
+			.addItem(p2, Double.valueOf(janSales.getItems().get(1).getQuantidade() * 1.1).intValue());
 
-		List<Sales> sales = IntStream.rangeClosed(3, 12).mapToObj(month -> {
-			int p1SalesInMarch = Simulation.rng(THIRD_MONTH_SALES);
-			return Sales.of(Month.of(month))
+		List<Vendas> sales = IntStream.rangeClosed(3, 12).mapToObj(month -> {
+			int p1SalesInMarch = Basesimulacao.rng(TERCEIRO_MES);
+			return Vendas.of(Month.of(month))
 				.addItem(p1, p1SalesInMarch)
-				.addItem(p2, THIRD_MONTH_SALES - p1SalesInMarch);
+				.addItem(p2, TERCEIRO_MES - p1SalesInMarch);
 		}).collect(Collectors.toList());
 
 		sales.add(0, janSales);
 		sales.add(1, febSales);
-		return new Company(company.getCapacity(), company.getMonthlyExpenses(), company.getMonthlyPayroll(), sales);
+		return new Empresa(empresa.getCapacity(), empresa.getMonthlyExpenses(), empresa.getMonthlyPayroll(), sales);
 	}
 
 }

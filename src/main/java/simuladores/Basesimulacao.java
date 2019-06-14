@@ -1,13 +1,13 @@
-package br.senac.sp.probabilidade.question;
-
-import br.senac.sp.probabilidade.model.Company;
-import br.senac.sp.probabilidade.model.Product;
+package simuladores;
 
 import java.util.Random;
 
-public interface Simulation {
+import modelos.Empresa;
+import modelos.Produto;
 
-	Company computeSalesOf(Product... products);
+public interface Basesimulacao {
+
+	Empresa calculeVendasde(Produto... products);
 
 	static Integer rng(Integer maxLimit) {
 		return new Random().nextInt(maxLimit + 1);

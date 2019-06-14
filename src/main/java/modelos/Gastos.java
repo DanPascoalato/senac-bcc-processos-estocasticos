@@ -1,59 +1,59 @@
-package br.senac.sp.probabilidade.model;
+package modelos;
 
-public class Expenses {
+public class Gastos {
 
-	private Double rent;
-	private Double electricityBill;
-	private Double waterSewerBill;
+	private Double aluguel;
+	private Double contaEletrica;
+	private Double contadeAgua;
 
-	private Expenses(Double rent, Double electricityBill, Double waterSewerBill) {
-		this.rent = rent;
-		this.electricityBill = electricityBill;
-		this.waterSewerBill = waterSewerBill;
+	private Gastos(Double aluguel, Double contaEletrica, Double contadeAgua) {
+		this.aluguel = aluguel;
+		this.contaEletrica = contaEletrica;
+		this.contadeAgua = contadeAgua;
 	}
 
 	public Double getSubtotal() {
-		return rent + electricityBill + waterSewerBill;
+		return aluguel + contaEletrica + contadeAgua;
 	}
 
 	public Double getRent() {
-		return rent;
+		return aluguel;
 	}
 
 	public Double getElectricityBill() {
-		return electricityBill;
+		return contaEletrica;
 	}
 
 	public Double getWaterSewerBill() {
-		return waterSewerBill;
+		return contadeAgua;
 	}
 
-	public static Builder builder() {
-		return new Builder();
+	public static Construtor construtor() {
+		return new Construtor();
 	}
 
-	public static class Builder {
-		private Double waterSewerBill;
-		private Double electrictyBill;
-		private Double rent;
+	public static class Construtor {
+		private Double contaAgua;
+		private Double contaEletrica;
+		private Double aluguel;
 
-		public Builder waterSewerBill(Double value) {
-			this.waterSewerBill = value;
+		public Construtor contaAgua(Double value) {
+			this.contaAgua = value;
 			return this;
 		}
 
-		public Builder electrictyBill(Double value) {
-			this.electrictyBill = value;
+		public Construtor contaEletrica(Double value) {
+			this.contaEletrica = value;
 			return this;
 		}
 
-		public Builder rent(Double value) {
-			this.rent = value;
+		public Construtor aluguel(Double valor) {
+			this.aluguel = valor;
 			return this;
 		}
 
-		public Expenses build() {
-			return new Expenses(rent, electrictyBill, waterSewerBill);
+		public Gastos construir() {
+			return new Gastos(aluguel, contaEletrica, contaAgua);
 		}
 
 	}

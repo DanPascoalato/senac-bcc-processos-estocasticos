@@ -1,62 +1,56 @@
-package br.senac.sp.probabilidade;
+package modelos;
 
-import br.senac.sp.probabilidade.model.*;
-import br.senac.sp.probabilidade.question.Q1Simulation;
-import br.senac.sp.probabilidade.question.Q2Simulation;
-import br.senac.sp.probabilidade.question.Report;
+import simuladores.Report;
+import simuladores.Simulacao1;
+import simuladores.Simulacao2;
 
 import java.io.IOException;
 
-public class Application {
+public class GeradordeTabela {
 
 	public static void main(String[] args) throws IOException {
-		Component componentA = new Component("A", 15.00);
-		Component componentB = new Component("B", 25.00);
+		Componente componenteA = new Componente("A", 15.00);
+		Componente componenteB = new Componente("B", 25.00);
 
-		Product p1 = Product.builder()
-			.component(componentA, 2)
-			.component(componentB, 1)
-			.unitPrice(70.00)
+		Produto p1 = Produto.construtor()
+			.componente(componenteA, 2)
+			.componente(componenteB, 1)
+			.precoUnidade(70.00)
 			.build();
 
-		Product p2 = Product.builder()
-			.component(componentA, 2)
-			.component(componentB, 3)
-			.unitPrice(70.00)
+		Produto p2 = Produto.construtor()
+			.componente(componenteA, 2)
+			.componente(componenteB, 3)
+			.precoUnidade(70.00)
 			.build();
 
-		Company company = Company.builder()
-			.capacity(400)
-			.expenses(buildExpenses())
-			.payroll(buildPayroll())
+		Empresa empresa = Empresa.construtor()
+			.capacidade(400)
+			.gastos(controiGastos())
+			.salario(controiSalario())
 			.build();
 
-		Company companySimA = new Q1Simulation(company).computeSalesOf(p1, p2);
-		Company companySimB = new Q2Simulation(company).computeSalesOf(p1, p2);
+		Empresa companySimA = new Simulacao1(empresa).calculeVendasde(p1, p2);
+		Empresa companySimB = new Simulacao2(empresa).calculeVendasde(p1, p2);
 
-		Report.generateReport(companySimA, "processos-estocasticos-p2-q5a.csv");
-		Report.generateReport(companySimB, "processos-estocasticos-p2-q5b.csv");
+		Report.geraReporte(companySimA, "PE-q5-exa.csv");
+		Report.geraReporte(companySimB, "PE-q5-exb.csv");
+	}
+	
+	private static Gastos controiGastos() {
+		return Gastos.construtor()
+			.aluguel(3500.00)
+			.contaEletrica(900.00)
+			.contaAgua(600.00)
+			.construir();
+	}
+	
+	private static Salário controiSalario() {
+		return Salário.builder().salarioLinhaProducao(3500.00).administrationalary(4000.00).generalServicesSalary(2000.00).salarioDiretor(6000.00)
+			.funcionarioProducao(5).funcionarioAdiministracao(2).employeesInGeneralServices(2).numberOfDirectors(1)
+			.construir();
 	}
 
-	private static Payroll buildPayroll() {
-		return Payroll.builder()
-			.productionLineSalary(3500.00)
-			.administrationalary(4000.00)
-			.generalServicesSalary(2000.00)
-			.directorSalary(6000.00)
-			.employeesInProduction(5)
-			.employeesInAdmin(2)
-			.employeesInGeneralServices(2)
-			.numberOfDirectors(1)
-			.build();
-	}
-
-	private static Expenses buildExpenses() {
-		return Expenses.builder()
-			.rent(3500.00)
-			.electrictyBill(900.00)
-			.waterSewerBill(600.00)
-			.build();
-	}
+	
 
 }

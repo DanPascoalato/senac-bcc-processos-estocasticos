@@ -1,55 +1,55 @@
-package br.senac.sp.probabilidade.model;
+package modelos;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Product {
+public class Produto {
 
-	private List<Component> components;
-	private Double unitPrice;
+	private List<Componente> componentes;
+	private Double precoUnidade;
 
-	private Product(List<Component> components, Double unitPrice) {
-		this.components = components;
-		this.unitPrice = unitPrice;
+	private Produto(List<Componente> componentes, Double precoUnidade) {
+		this.componentes = componentes;
+		this.precoUnidade = precoUnidade;
 	}
 
-	public Double getProductionCost() {
-		return components.stream()
-			.map(Component::getProductionCost)
+	public Double getGastoProducao() {
+		return componentes.stream()
+			.map(Componente::getGastoProducao)
 			.reduce(0.0, (a,b) -> a+b);
 	}
 
 
-	public List<Component> getComponents() {
-		return components;
+	public List<Componente> getComponente() {
+		return componentes;
 	}
 
-	public Double getUnitPrice() {
-		return unitPrice;
+	public Double getPrecoUnidade() {
+		return precoUnidade;
 	}
 
-	public static Builder builder() {
-		return new Builder();
+	public static Construtor construtor() {
+		return new Construtor();
 	}
 
-	public static class Builder {
+	public static class Construtor {
 
-		private List<Component> components = new ArrayList<>();
-		private Double unitPrice;
+		private List<Componente> componentes = new ArrayList<>();
+		private Double precoUnidade;
 
-		public Builder component(Component component, Integer qtty) {
-			this.components.addAll(Collections.nCopies(qtty, component));
+		public Construtor componente(Componente componente, Integer qtd) {
+			this.componentes.addAll(Collections.nCopies(qtd, componente));
 			return this;
 		}
 
-		public Builder unitPrice(Double unitPrice) {
-			this.unitPrice = unitPrice;
+		public Construtor precoUnidade(Double precoUnidade) {
+			this.precoUnidade = precoUnidade;
 			return this;
 		}
 
-		public Product build() {
-			return new Product(components, unitPrice);
+		public Produto build() {
+			return new Produto(componentes, precoUnidade);
 		}
 
 	}
